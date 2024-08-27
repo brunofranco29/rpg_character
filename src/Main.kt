@@ -1,75 +1,92 @@
 import character.Character
 import character.Race
 import character.CharacterClass
-import character.Attributes
 import character.subrace.*
 
 fun main() {
-    val attributes1 = Attributes(
-        strength = 15,
-        dexterity = 14,
-        constitution = 13,
-        intelligence = 10,
-        wisdom = 10,
-        charisma = 8
-    )
-
-    val character1 = Character(
+    // Criando o personagem Thorin
+    val thorin = Character(
         name = "Thorin",
         race = Race.DWARF,
-        subrace = dwarfSubrace.MOUNTAIN_DWARF,
+        subrace = DwarfSubrace.MOUNTAIN_DWARF,
         characterClass = CharacterClass.FIGHTER,
-        attributes = attributes1,
-        description = "Thorin is a seasoned warrior from the Iron Hills, known for his unmatched skill in battle."
+        baseStrength = 15,
+        baseDexterity = 10,
+        baseConstitution = 14,
+        baseIntelligence = 10,
+        baseWisdom = 12,
+        baseCharisma = 8,
+        description = "Rei sob a montanha, em busca de recuperar seu reino perdido."
     )
 
-    val attributes2 = Attributes(
-        strength = 10,
-        dexterity = 15,
-        constitution = 14,
-        intelligence = 13,
-        wisdom = 10,
-        charisma = 8
-    )
-
-    val character2 = Character(
+    // Criando o personagem Elrond
+    val elrond = Character(
         name = "Elrond",
         race = Race.ELF,
-        subrace = elfSubrace.HIGH_ELF,
+        subrace = ElfSubrace.HIGH_ELF,
         characterClass = CharacterClass.WIZARD,
-        attributes = attributes2,
-        description = "Elrond is a wise and powerful High Elf wizard, with knowledge spanning centuries."
+        baseStrength = 10,
+        baseDexterity = 14,
+        baseConstitution = 12,
+        baseIntelligence = 15,
+        baseWisdom = 13,
+        baseCharisma = 14,
+        description = "Senhor de Valfenda, sábio e imortal."
     )
 
-    val attributes3 = Attributes(
-        strength = 10,
-        dexterity = 14,
-        constitution = 12,
-        intelligence = 11,
-        wisdom = 13,
-        charisma = 15
-    )
-
-    val character3 = Character(
+    // Criando o personagem Frodo
+    val frodo = Character(
         name = "Frodo",
         race = Race.HALFLING,
-        subrace = halflingSubrace.LIGHTFOOT_HALFLING,
+        subrace = HalflingSubrace.LIGHTFOOT_HALFLING,
         characterClass = CharacterClass.ROGUE,
-        attributes = attributes3,
-        description = "Frodo is a light-footed halfling rogue from the Shire, known for his agility and stealth."
+        baseStrength = 8,
+        baseDexterity = 14,
+        baseConstitution = 13,
+        baseIntelligence = 12,
+        baseWisdom = 10,
+        baseCharisma = 14,
+        description = "Pequeno hobbit com uma grande missão, portador do Anel."
     )
 
-    printCharacterInfo(character1)
-    printCharacterInfo(character2)
-    printCharacterInfo(character3)
-}
+    // Criando o personagem Drizzt
+    val drizzt = Character(
+        name = "Drizzt",
+        race = Race.ELF,
+        subrace = ElfSubrace.DROW,
+        characterClass = CharacterClass.RANGER,
+        baseStrength = 13,
+        baseDexterity = 15,
+        baseConstitution = 14,
+        baseIntelligence = 12,
+        baseWisdom = 13,
+        baseCharisma = 10,
+        description = "Drow renegado, mestre das lâminas, e defensor dos fracos."
+    )
 
-fun printCharacterInfo(character: Character) {
-    println("Name: ${character.name}")
-    println("Race: ${character.race}")
-    println("Subrace: ${character.subrace ?: "None"}")
-    println("Class: ${character.characterClass}")
-    println("Attributes: ${character.adjustedAttributes}")
-    println("Description: ${character.description}")
+    // Criando o personagem Gandalf
+    val gandalf = Character(
+        name = "Gandalf",
+        race = Race.HUMAN,
+        subrace = null,
+        characterClass = CharacterClass.WIZARD,
+        baseStrength = 10,
+        baseDexterity = 10,
+        baseConstitution = 12,
+        baseIntelligence = 15,
+        baseWisdom = 14,
+        baseCharisma = 13,
+        description = "Mago sábio e poderoso, guia dos povos livres."
+    )
+
+    // Exibindo os personagens criados
+    println(thorin)
     println()
+    println(elrond)
+    println()
+    println(frodo)
+    println()
+    println(drizzt)
+    println()
+    println(gandalf)
 }
