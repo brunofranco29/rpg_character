@@ -1,6 +1,10 @@
 package character
 
 import character.subrace.*
+import strategy.BarbarianHealthStrategy
+import strategy.DefaultHealthStrategy
+import strategy.HealthStrategy
+import strategy.WizardHealthStrategy
 
 data class Character(
     val name: String,
@@ -23,6 +27,7 @@ data class Character(
         require(baseIntelligence in 8..15) { "Intelligence must be between 8 and 15" }
         require(baseWisdom in 8..15) { "Wisdom must be between 8 and 15" }
         require(baseCharisma in 8..15) { "Charisma must be between 8 and 15" }
+        requireNotNull(race) { "A raça do personagem é obrigatória." }
     }
 
     // Função para calcular os atributos finais aplicando bônus raciais
@@ -43,6 +48,23 @@ data class Character(
             "Charisma" to finalCharisma
         )
     }
+//    private fun constitutionBonus(): Int {
+//        return Math.floorDiv(baseConstitution - 10, 2) // Arredonda para baixo em casos de valores como -0.5
+//    }
+//
+//    // Cálculo da vida com base no bônus de Constituição
+//    val health: Int
+//        get() = 10 + constitutionBonus()
+
+    private val healthStrategy: HealthStrategy = when (characterClass) {
+        CharacterClass.BARBARIAN -> BarbarianHealthStrategy()
+        CharacterClass.WIZARD -> WizardHealthStrategy()
+        // Adicione outras classes e suas estratégias específicas aqui
+        else -> DefaultHealthStrategy() // Estratégia padrão para outras classes
+    }
+
+    val health: Int
+        get() = healthStrategy.calculateHealth(baseConstitution)
 
     // Função para obter o bônus racial para um atributo específico
     private fun getRaceBonus(attribute: String): Int {
@@ -132,6 +154,7 @@ data class Character(
               Intelligence: ${attributes["Intelligence"]}
               Wisdom: ${attributes["Wisdom"]}
               Charisma: ${attributes["Charisma"]}
+              Health: $health
             Description: $description
         """.trimIndent()
     }
